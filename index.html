@@ -1,0 +1,799 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Somewhere in the Universe</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #080711;
+  --purple: #a78bfa;
+  --pink: #d9a4ff;
+  --text: #eee9f8;
+  --muted: #a5a0b7;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Vazirmatn', sans-serif;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, #44276b30, transparent 35%),
+    radial-gradient(circle at 85% 70%, #542d8030, transparent 40%);
+  z-index: -1;
+}
+
+/* Star background */
+#stars {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle infinite ease-in-out alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: .15; transform: scale(.7); }
+  to { opacity: .9; transform: scale(1.3); }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d7b8ff, transparent);
+  transform: rotate(-35deg);
+  animation: shoot 5s linear infinite;
+  opacity: 0;
+}
+
+@keyframes shoot {
+  0% { transform: translate(0,0) rotate(-35deg); opacity: 0; }
+  8% { opacity: .8; }
+  25% { transform: translate(-350px,250px) rotate(-35deg); opacity: 0; }
+  100% { transform: translate(-350px,250px) rotate(-35deg); opacity: 0; }
+}
+
+section, header, footer {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  width: min(900px, 92%);
+  margin: auto;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 0;
+}
+
+.logo {
+  color: var(--pink);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.nav-link {
+  color: #aaa3bd;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+/* Hero */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 35px 20px;
+}
+
+.moon {
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #f2eaff, #bda1e8 45%, #6e5598 75%, #392b54);
+  box-shadow: 0 0 35px #a77be544, 0 0 100px #7d50a522;
+  margin-bottom: 35px;
+  position: relative;
+  animation: float 5s ease-in-out infinite;
+}
+
+.moon::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: #8d75b4;
+  border-radius: 50%;
+  top: 25px;
+  left: 25px;
+  opacity: .3;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.eyebrow {
+  font-size: 11px;
+  color: #9e86ce;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
+
+.hero h1 {
+  font-size: clamp(34px, 8vw, 65px);
+  font-weight: 400;
+  line-height: 1.5;
+  background: linear-gradient(135deg, #fff, #c8a9ff, #8c74b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  max-width: 450px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2.3;
+  margin-top: 15px;
+}
+
+.names {
+  margin-top: 35px;
+  color: #d7c2ff;
+  letter-spacing: 3px;
+  font-size: 15px;
+}
+
+.scroll {
+  position: absolute;
+  bottom: 25px;
+  font-size: 10px;
+  color: #817991;
+  letter-spacing: 2px;
+  animation: float 3s infinite;
+}
+
+/* Section titles */
+.section {
+  padding: 85px 0;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.section-heading .small {
+  color: #9d81cf;
+  font-size: 10px;
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+}
+
+.section-heading h2 {
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+/* Counter */
+.counter-box {
+  border: 1px solid #8d72ba35;
+  background: linear-gradient(145deg, #151020, #0c0a14);
+  border-radius: 24px;
+  padding: 35px 20px;
+  text-align: center;
+  box-shadow: 0 15px 60px #0004;
+}
+
+.counter-box .label {
+  color: #a896c9;
+  font-size: 12px;
+}
+
+.counter {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 25px 0;
+  direction: ltr;
+}
+
+.counter-item {
+  min-width: 60px;
+}
+
+.counter-item strong {
+  display: block;
+  font-size: 28px;
+  color: #e5d4ff;
+  font-weight: 400;
+}
+
+.counter-item span {
+  color: #89829c;
+  font-size: 10px;
+}
+
+.counter-box .bottom {
+  color: #9b91ac;
+  font-size: 12px;
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.photo-card {
+  padding: 12px;
+  background: #171320;
+  border: 1px solid #b28aff18;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: .4s;
+}
+
+.photo-card:hover {
+  transform: translateY(-6px);
+  border-color: #b89aff65;
+  box-shadow: 0 10px 35px #8c65b51b;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 310px;
+  display: block;
+  object-fit: contain;
+  background: #0b0911;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.photo-caption {
+  padding: 15px 5px 5px;
+  color: #c4b4dc;
+  font-size: 12px;
+}
+
+.photo-caption small {
+  display: block;
+  color: #777084;
+  margin-top: 6px;
+  font-size: 10px;
+}
+
+/* Memories */
+.memory-list {
+  display: grid;
+  gap: 15px;
+}
+
+.memory {
+  position: relative;
+  padding: 23px;
+  background: linear-gradient(120deg, #16101f, #0d0b15);
+  border: 1px solid #a47bd21b;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.memory::before {
+  content: "✦";
+  position: absolute;
+  left: 20px;
+  top: 12px;
+  color: #8c72b9;
+  opacity: .6;
+}
+
+.memory h3 {
+  color: #c9b1f2;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.memory p {
+  color: #aaa3b9;
+  font-size: 12px;
+  line-height: 2.2;
+}
+
+/* Hidden message */
+.secret-area {
+  text-align: center;
+  padding: 30px 15px;
+}
+
+.secret-btn {
+  border: 1px solid #a987d64d;
+  background: #171020;
+  color: #d6c1fa;
+  font-family: inherit;
+  border-radius: 50px;
+  padding: 14px 25px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.secret-btn:hover {
+  background: #2b1b3b;
+  box-shadow: 0 0 30px #9b73d322;
+}
+
+.secret-message {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 1s ease;
+  color: #c9bddb;
+  line-height: 2.5;
+  font-size: 13px;
+  max-width: 550px;
+  margin: auto;
+}
+
+.secret-message.show {
+  opacity: 1;
+  max-height: 500px;
+  margin-top: 30px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 50px 15px 35px;
+  color: #777086;
+  font-size: 11px;
+}
+
+footer .symbol {
+  color: #a990d8;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #05040beF;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 95%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: 1s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media(max-width:600px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-card img {
+    height: 340px;
+  }
+
+  .counter {
+    gap: 10px;
+  }
+
+  .counter-item strong {
+    font-size: 23px;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+  .section {
+    padding: 65px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<div class="container">
+
+<nav>
+  <div class="logo">A LITTLE UNIVERSE</div>
+  <a class="nav-link" href="#memories">MEMORIES</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="moon"></div>
+
+  <div class="eyebrow">A SMALL ARCHIVE OF BIG MEMORIES</div>
+
+  <h1>سیب و عارو</h1>
+
+  <p>
+    یه گوشه‌ی کوچیک از اینترنت،
+    برای لحظه‌هایی که ثبت شدن
+    و نباید از یاد برن.
+  </p>
+
+  <div class="names">APPLE & ARO</div>
+
+  <div class="scroll">SCROLL TO EXPLORE</div>
+</header>
+
+<!-- COUNTER -->
+<section class="section reveal">
+  <div class="section-heading">
+    <div class="small">TIME CAPSULE</div>
+    <h2>از اون روز تا امروز</h2>
+    <p>یه عالمه خاطره، چندتا بازی، و کلی اتفاق</p>
+  </div>
+
+  <div class="counter-box">
+    <div class="label">زمان گذشته از شروع آشنایی</div>
+
+    <div class="counter" id="counter">
+      <div class="counter-item">
+        <strong id="days">0</strong>
+        <span>روز</span>
+      </div>
+      <div class="counter-item">
+        <strong id="hours">00</strong>
+        <span>ساعت</span>
+      </div>
+      <div class="counter-item">
+        <strong id="minutes">00</strong>
+        <span>دقیقه</span>
+      </div>
+      <div class="counter-item">
+        <strong id="seconds">00</strong>
+        <span>ثانیه</span>
+      </div>
+    </div>
+
+    <div class="bottom">
+      ۱۳ آذر — تاریخ شروع این آرشیو
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section reveal" id="memories">
+
+  <div class="section-heading">
+    <div class="small">SCREENSHOTS & CHAOS</div>
+    <h2>لحظه‌های ثبت‌شده</h2>
+    <p>بعضی خاطرات فقط با دیدن یه عکس دوباره زنده می‌شن.</p>
+  </div>
+
+  <div class="gallery">
+
+    <div class="photo-card">
+      <img src="1000025686.png" alt="Gaming memory 1">
+      <div class="photo-caption">
+        یه مأموریت دیگه
+        <small>Somewhere in the game</small>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="1000025688.png" alt="Gaming memory 2">
+      <div class="photo-caption">
+        بدون توضیح
+        <small>Screenshot saved</small>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="1000026554.jpg" alt="Gaming memory 3">
+      <div class="photo-caption">
+        این یکی رو باید نگه داشت
+        <small>Another memory unlocked</small>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="1000026557.jpg" alt="Gaming memory 4">
+      <div class="photo-caption">
+        سطح آشوب: بالا
+        <small>Certified chaos</small>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="1000026558.jpg" alt="Gaming memory 5">
+      <div class="photo-caption">
+        دو بازیکن، کلی داستان
+        <small>Player one & player two</small>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="1000032531.jpg" alt="Gaming memory 6">
+      <div class="photo-caption">
+        ادامه دارد...
+        <small>To be continued</small>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MEMORY NOTES -->
+<section class="section reveal">
+  <div class="section-heading">
+    <div class="small">NOTES FROM THE UNIVERSE</div>
+    <h2>چیزهایی که یادم می‌مونه</h2>
+  </div>
+
+  <div class="memory-list">
+
+    <div class="memory">
+      <h3>مرحله‌های سخت</h3>
+      <p>
+        همه‌ی روزها قرار نیست خوب پیش برن.
+        بعضی وقتا فقط گذروندن یه روز خودش کلی انرژی می‌خواد.
+        اینکه توی بعضی از اون روزها یکی بوده که بشه باهاش حرف زد،
+        چیزی نیست که فراموش بشه.
+      </p>
+    </div>
+
+    <div class="memory">
+      <h3>لحظه‌های بی‌برنامه</h3>
+      <p>
+        بازی‌هایی که قرار بود یه مدت کوتاه باشن،
+        خنده‌هایی که از کنترل خارج شدن،
+        و بحث‌هایی که هیچ‌کس آخرش یادش نبود سر چی شروع شدن.
+      </p>
+    </div>
+
+    <div class="memory">
+      <h3>ادامه‌ی داستان</h3>
+      <p>
+        هنوز کلی مرحله مونده،
+        کلی خاطره‌ی جدید،
+        کلی اتفاق که فعلاً توی این آرشیو جا ندارن.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECRET -->
+<section class="section reveal">
+  <div class="section-heading">
+    <div class="small">UNLOCK SOMETHING</div>
+    <h2>یه پیام مخفی</h2>
+    <p>این قسمت رو فقط با کلیک می‌شه دید.</p>
+  </div>
+
+  <div class="secret-area">
+    <button class="secret-btn" id="secretBtn">
+      باز کردن پیام
+    </button>
+
+    <div class="secret-message" id="secretMessage">
+      <p>
+        خلاصه که ممنون بابت تمام وقتایی که
+        با حرف زدن، خندیدن یا حتی فقط حضورت
+        یه روز سخت رو کمی بهتر کردی.
+        <br><br>
+        امیدوارم روزهای بعدی پر از اتفاقای خوب،
+        بازی‌های بهتر و خاطرات خنده‌دارتر باشن.
+        <br><br>
+        سالگرد آشنایی مبارک، سیب.
+        <br>
+        — عارو
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="symbol">✦</div>
+  <div>Some memories deserve their own universe.</div>
+  <div style="margin-top:10px">APPLE & ARO · 2026</div>
+</footer>
+
+</div>
+
+<!-- IMAGE VIEWER -->
+<div class="lightbox" id="lightbox">
+  <span class="close" id="closeLightbox">&times;</span>
+  <img id="lightboxImg" src="" alt="Memory">
+</div>
+
+<script>
+
+/* Generate stars */
+const starContainer = document.getElementById('stars');
+
+for (let i = 0; i < 120; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+
+  const size = Math.random() * 2.5 + 1;
+  star.style.width = size + 'px';
+  star.style.height = size + 'px';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.animationDuration = (1.5 + Math.random() * 4) + 's';
+  star.style.animationDelay = Math.random() * 4 + 's';
+
+  starContainer.appendChild(star);
+}
+
+/* Shooting stars */
+for (let i = 0; i < 4; i++) {
+  const shooting = document.createElement('div');
+  shooting.className = 'shooting-star';
+  shooting.style.top = Math.random() * 40 + '%';
+  shooting.style.left = Math.random() * 100 + '%';
+  shooting.style.animationDelay = (i * 3) + 's';
+  starContainer.appendChild(shooting);
+}
+
+/* Anniversary timer
+   13 Azar 1405 = December 4, 2026
+*/
+const anniversary = new Date('2026-12-04T00:00:00');
+
+function updateCounter() {
+  const now = new Date();
+  let diff = now - anniversary;
+
+  // If date is in the future, count down
+  if (diff < 0) {
+    diff = Math.abs(diff);
+    document.querySelector('.counter-box .label').textContent =
+      'زمان باقی‌مانده تا سالگرد';
+  } else {
+    document.querySelector('.counter-box .label').textContent =
+      'زمان گذشته از شروع آشنایی';
+  }
+
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000) / 60000);
+  const seconds = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
+}
+
+updateCounter();
+setInterval(updateCounter, 1000);
+
+/* Secret message */
+const secretBtn = document.getElementById('secretBtn');
+const secretMessage = document.getElementById('secretMessage');
+
+secretBtn.addEventListener('click', () => {
+  secretMessage.classList.toggle('show');
+
+  if (secretMessage.classList.contains('show')) {
+    secretBtn.textContent = 'بستن پیام';
+  } else {
+    secretBtn.textContent = 'باز کردن پیام';
+  }
+});
+
+/* Lightbox */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+
+document.querySelectorAll('.photo-card img').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add('active');
+  });
+});
+
+document.getElementById('closeLightbox').addEventListener('click', () => {
+  lightbox.classList.remove('active');
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.classList.remove('active');
+  }
+});
+
+/* Reveal on scroll */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => {
+  observer.observe(el);
+});
+
+</script>
+</body>
+</html>
